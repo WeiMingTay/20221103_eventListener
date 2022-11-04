@@ -48,15 +48,30 @@ setInterval(countdown, 1000);
 
 function countdown() {
 	let datumInput = new Date(document.getElementById("inputDate").value);
+	let jahr = document.getElementById("jahrAusgabe");
+	let monat = document.getElementById("monatAusgabe");
+	let woche = document.getElementById("wocheAusgabe");
 	let tage = document.getElementById("tageAusgabe");
 	let stunden = document.getElementById("stdAusgabe");
 	let minuten = document.getElementById("minAusgabe");
 	let sekunden = document.getElementById("sekAusgabe");
 
 	let datum = datumInput.getTime() - new Date().getTime();
+	let countdownSek = Math.floor(datum / 1000);
+	let countdownMin = Math.floor(countdownSek / 60);
+	let countdownStd = Math.floor(countdownMin / 60);
+	let countdownTag = Math.floor(countdownStd / 24);
+	let countdownWoche = Math.floor(countdownTag / 7);
+	let countdownMonat = Math.floor(countdownWoche / 30);
+    let countdownJahr = Math.floor(countdownMonat / 12)
 
-	sekunden.innerHTML = Math.floor(datum / 1000)-(Math.floor(datum / 1000 / 60))*60;
-	minuten.innerHTML = Math.floor(datum / 1000 / 60)-(Math.floor((datum/1000)/60/60))*60;
-    stunden.innerHTML = Math.floor((datum/1000)/60/60)-(Math.floor((datum/1000)/60/60/24)*24)
-    tage.innerHTML = Math.floor((datum/1000)/60/60/24)
+    if (datumInput != "Invalid Date") {
+	sekunden.innerHTML = countdownSek - countdownMin * 60;
+	minuten.innerHTML = countdownMin - countdownStd * 60;
+	stunden.innerHTML = countdownStd - countdownTag * 24;
+	tage.innerHTML = countdownTag;
+	// woche.innerHTML = countdownWoche -countdownMonat * 12;
+	// monat.innerHTML = countdownMonat - countdownJahr;
+    // jahr.innerHTML = countdownJahr
+    } 
 }
