@@ -37,7 +37,26 @@ document.body.addEventListener("keydown", (e) => {
 	keyCode.innerHTML = e.keyCode;
 	document.getElementById("keyCode").innerHTML = e.keyCode;
 	code.innerHTML = e.code;
-    ascii.innerHTML = (e.key.charCodeAt())
+	ascii.innerHTML = e.key.charCodeAt();
 });
 
 console.log("%c=== lev2_4 Counter Birthday ===", "color:lightgreen");
+// Schreibe eine kleine App, die die Zeit bis zu deinem Geburtstag zählt.
+// Zeit = Tage, Stunden, Minuten, Sekunden.
+
+setInterval(countdown, 1000);
+
+function countdown() {
+	let datumInput = new Date(document.getElementById("inputDate").value);
+	let tage = document.getElementById("tageAusgabe");
+	let stunden = document.getElementById("stdAusgabe");
+	let minuten = document.getElementById("minAusgabe");
+	let sekunden = document.getElementById("sekAusgabe");
+
+	let datum = datumInput.getTime() - new Date().getTime();
+
+	sekunden.innerHTML = Math.floor(datum / 1000)-(Math.floor(datum / 1000 / 60))*60;
+	minuten.innerHTML = Math.floor(datum / 1000 / 60)-(Math.floor((datum/1000)/60/60))*60;
+    stunden.innerHTML = Math.floor((datum/1000)/60/60)-(Math.floor((datum/1000)/60/60/24)*24)
+    tage.innerHTML = Math.floor((datum/1000)/60/60/24)
+}
